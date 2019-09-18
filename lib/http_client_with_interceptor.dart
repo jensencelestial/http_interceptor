@@ -59,15 +59,15 @@ class HttpClientWithInterceptor extends http.BaseClient {
 
   Future<Response> post(url,
           {Map<String, String> headers, body, Encoding encoding}) =>
-      _sendUnstreamed("POST", url, headers, body, encoding);
+      _sendUnstreamed("POST", url, headers, null, body, encoding);
 
   Future<Response> put(url,
           {Map<String, String> headers, body, Encoding encoding}) =>
-      _sendUnstreamed("PUT", url, headers, body, encoding);
+      _sendUnstreamed("PUT", url, headers, null, body, encoding);
 
   Future<Response> patch(url,
           {Map<String, String> headers, body, Encoding encoding}) =>
-      _sendUnstreamed("PATCH", url, headers, body, encoding);
+      _sendUnstreamed("PATCH", url, headers, null, body, encoding);
 
   Future<Response> delete(url, {Map<String, String> headers}) =>
       _sendUnstreamed("DELETE", url, headers, null);
@@ -98,7 +98,8 @@ class HttpClientWithInterceptor extends http.BaseClient {
         params.forEach((key, value) {
           paramUrl += "$key=$value&";
         });
-        paramUrl = paramUrl.substring(0, paramUrl.length); // to remove the last '&' character
+        paramUrl = paramUrl.substring(
+            0, paramUrl.length); // to remove the last '&' character
       }
       url = Uri.parse(paramUrl);
     }
